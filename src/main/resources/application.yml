@@ -1,0 +1,11 @@
+spring:
+  mqtt:
+    username: mask
+    password: ljhLJH080230.
+    url: tcp://47.99.130.56:1883
+    client:
+      id: 'maskId'
+    default:
+      topic: 'topic'
+    topics: topic,hello,hit/us
+    qosValues: 2,3
