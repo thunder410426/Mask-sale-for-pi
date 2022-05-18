@@ -31,7 +31,13 @@ public class TestController {
             System.out.println(frequency);
             Thread.sleep(1000);
             System.out.println("正在转动");
+            return "转动~";
         }
+    }
+
+    @PostMapping("test1")
+    public String test1(){
+        return "连接成功";
     }
 
 
