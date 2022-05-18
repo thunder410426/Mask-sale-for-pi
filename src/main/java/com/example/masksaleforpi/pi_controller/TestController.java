@@ -22,6 +22,10 @@ public class TestController {
 
     @PostMapping("test")
     public String test() throws InterruptedException {
+
+        //日志
+        System.setProperty("org.slf4j.simpleLogger.defaultLogLevel", "INFO");
+
         Pin pinout = RaspiPin.GPIO_15;
         long frequency = 50;
         GpioController gpio = GpioFactory.getInstance();
