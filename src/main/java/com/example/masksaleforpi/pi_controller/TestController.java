@@ -22,7 +22,7 @@ public class TestController {
 
     @PostMapping("test")
     public String test() throws InterruptedException {
-        Pin pinout = RaspiPin.GPIO_14;
+        Pin pinout = RaspiPin.GPIO_15;
         long frequency = 50;
         GpioController gpio = GpioFactory.getInstance();
         GpioPinImpl gpioOut = new GpioPinImpl(gpio, new RaspiGpioProvider(), pinout);
