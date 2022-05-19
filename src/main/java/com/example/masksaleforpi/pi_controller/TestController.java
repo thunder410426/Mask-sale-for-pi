@@ -2,11 +2,14 @@ package com.example.masksaleforpi.pi_controller;
 
 import com.pi4j.io.gpio.*;
 import com.pi4j.io.gpio.impl.GpioPinImpl;
+import com.pi4j.io.i2c.I2CBus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.math.BigDecimal;
 
 /**
  * Created with IntelliJ IDEA.
@@ -22,23 +25,18 @@ public class TestController {
 
     @PostMapping("test")
     public String test() throws InterruptedException {
-
-        //日志
-        System.setProperty("org.slf4j.simpleLogger.defaultLogLevel", "INFO");
-
-        Pin pinout = RaspiPin.GPIO_15;
-        int frequency = 50;
+        System.out.println("Started");
         GpioController gpio = GpioFactory.getInstance();
-        GpioPinImpl gpioOut = new GpioPinImpl(gpio, new RaspiGpioProvider(), pinout);
-        gpioOut.setPwm(frequency);
-        while (true){
-            frequency = gpioOut.getPwm();
-            System.out.println(frequency);
-            gpioOut.pulse(1000, true);
-            Thread.sleep(1000);
-            System.out.println("正在转动");
-            return "转动~";
-        }
+        GpioPinPwmOutput motor;
+        Pin pin = RaspiPin.GPIO_15;
+        motor = gpio.provisionPwmOutputPin(pin);
+
+        com.pi4j.wiringpi.Gpio.pwmSetMode(com.pi4j.wiringpi.Gpio.PWM_MODE_MS);
+        com.pi4j.wiringpi.Gpio.pwmSetRange(1000);
+        com.pi4j.wiringpi.Gpio.pwmSetClock(1);
+
+        motor.setPwm(300);
+        return "启动成功";
     }
 
     @PostMapping("test1")
