@@ -48,7 +48,7 @@ public class TestController {
         p.setPwmRange(100);
 
         //pin关机
-        p.setShutdownOptions(true, PinState.LOW, PinPullResistance.PULL_DOWN);
+//        p.setShutdownOptions(true, PinState.LOW, PinPullResistance.PULL_DOWN);
         //添加触发器
         button.addTrigger(new GpioSyncStateTrigger((GpioPinDigitalOutput) p));
 
