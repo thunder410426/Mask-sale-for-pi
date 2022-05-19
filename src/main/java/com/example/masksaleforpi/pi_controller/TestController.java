@@ -28,9 +28,17 @@ public class TestController {
         System.out.println("Started");
         GpioController gpio = GpioFactory.getInstance();
         GpioPinPwmOutput motor;
-        final GpioPinPwmOutput p = gpio.provisionSoftPwmOutputPin(RaspiBcmPin.GPIO_15, "motor", 300);
-        p.setPwm(200);
-        p.setPwm(200);
+        final GpioPinPwmOutput p = gpio.provisionSoftPwmOutputPin(RaspiBcmPin.GPIO_15, "motor", 100);
+        p.setShutdownOptions(true, PinState.LOW);
+        p.setPwmRange(100);
+        while (true){
+            p.setPwm(200);
+            p.setPwm(200);
+            Thread.sleep(1000);
+            System.out.println("旋转！旋转！");
+        }
+
+
 
 //
 //        Pin pin = RaspiPin.GPIO_15;
@@ -43,8 +51,6 @@ public class TestController {
 //
 //        motor.setPwm(300);
 //        gpio.setState(true, (GpioPinDigitalOutput) motor);
-
-        return "启动成功";
     }
 
     @PostMapping("test1")
