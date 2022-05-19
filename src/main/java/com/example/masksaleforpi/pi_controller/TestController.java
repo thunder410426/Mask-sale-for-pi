@@ -27,12 +27,14 @@ public class TestController {
         System.setProperty("org.slf4j.simpleLogger.defaultLogLevel", "INFO");
 
         Pin pinout = RaspiPin.GPIO_15;
-        long frequency = 50;
+        int frequency = 50;
         GpioController gpio = GpioFactory.getInstance();
         GpioPinImpl gpioOut = new GpioPinImpl(gpio, new RaspiGpioProvider(), pinout);
+        gpioOut.setPwm(frequency);
         while (true){
             frequency = gpioOut.getPwm();
             System.out.println(frequency);
+            gpioOut.pulse(1000, true);
             Thread.sleep(1000);
             System.out.println("正在转动");
             return "转动~";
