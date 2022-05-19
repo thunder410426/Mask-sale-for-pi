@@ -32,14 +32,6 @@ public class TestController {
         GpioController gpio = GpioFactory.getInstance();
         GpioPinPwmOutput motor;
 
-        GpioPinDigitalInput button = gpio.provisionDigitalInputPin(RaspiPin.GPIO_01, "button",
-                PinPullResistance.PULL_DOWN);
-
-        //获取与此按钮关联的 GPIO 引脚的显式状态枚举
-        PinState state = button.getState();
-        // 使用方便的包装方法来审问的按钮状态
-        boolean buttonPressed = button.isHigh();
-        button.addListener(new GpioUsageExampleListener());
 
 
         //输出
@@ -48,9 +40,7 @@ public class TestController {
         p.setPwmRange(100);
 
         //pin关机
-//        p.setShutdownOptions(true, PinState.LOW, PinPullResistance.PULL_DOWN);
-        //添加触发器
-        button.addTrigger(new GpioSyncStateTrigger((GpioPinDigitalOutput) p));
+        p.setShutdownOptions(true, PinState.LOW, PinPullResistance.PULL_DOWN);
 
 
         while (true){
