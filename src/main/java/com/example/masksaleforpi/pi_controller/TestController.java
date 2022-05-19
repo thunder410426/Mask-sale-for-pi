@@ -28,7 +28,7 @@ public class TestController {
         System.out.println("Started");
         GpioController gpio = GpioFactory.getInstance();
         GpioPinPwmOutput motor;
-        final GpioPinPwmOutput p = gpio.provisionSoftPwmOutputPin(RaspiBcmPin.GPIO_15, "motor", 100);
+        final GpioPinPwmOutput p = gpio.provisionSoftPwmOutputPin(RaspiBcmPin.GPIO_15, "motor", 50);
         p.setShutdownOptions(true, PinState.LOW);
         p.setPwmRange(100);
         while (true){
